@@ -92,6 +92,12 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cb_autosave = new System.Windows.Forms.CheckBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.tb_saveinterval = new System.Windows.Forms.ToolStripTextBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.cb_autoclear = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -125,7 +131,10 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator3,
-            this.toolStripButton3});
+            this.toolStripButton3,
+            this.toolStripLabel3,
+            this.tb_saveinterval,
+            this.toolStripLabel4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(878, 25);
@@ -166,12 +175,13 @@
             "19200",
             "38400",
             "56000",
-            "115000",
+            "115200",
             "250000",
             "300000",
             "500000"});
             this.toolStripComboBox2.Name = "toolStripComboBox2";
             this.toolStripComboBox2.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox2.Text = "115200";
             // 
             // toolStripSeparator2
             // 
@@ -494,9 +504,9 @@
             // 
             this.tableLayoutPanel5.ColumnCount = 6;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel5.Controls.Add(this.button6, 2, 0);
@@ -511,6 +521,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(634, 27);
             this.tableLayoutPanel5.TabIndex = 2;
+            this.tableLayoutPanel5.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel5_Paint);
             // 
             // button6
             // 
@@ -810,11 +821,60 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cb_autosave
+            // 
+            this.cb_autosave.AutoSize = true;
+            this.cb_autosave.Location = new System.Drawing.Point(655, 5);
+            this.cb_autosave.Name = "cb_autosave";
+            this.cb_autosave.Size = new System.Drawing.Size(73, 17);
+            this.cb_autosave.TabIndex = 2;
+            this.cb_autosave.Text = "AutoSave";
+            this.cb_autosave.UseVisualStyleBackColor = true;
+            this.cb_autosave.CheckedChanged += new System.EventHandler(this.cb_autosave_CheckedChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(73, 22);
+            this.toolStripLabel3.Text = "Save interval";
+            // 
+            // tb_saveinterval
+            // 
+            this.tb_saveinterval.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tb_saveinterval.Name = "tb_saveinterval";
+            this.tb_saveinterval.Size = new System.Drawing.Size(50, 25);
+            this.tb_saveinterval.Text = "60000";
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 60000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripLabel4.Text = "ms";
+            // 
+            // cb_autoclear
+            // 
+            this.cb_autoclear.AutoSize = true;
+            this.cb_autoclear.Checked = true;
+            this.cb_autoclear.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_autoclear.Location = new System.Drawing.Point(734, 5);
+            this.cb_autoclear.Name = "cb_autoclear";
+            this.cb_autoclear.Size = new System.Drawing.Size(72, 17);
+            this.cb_autoclear.TabIndex = 3;
+            this.cb_autoclear.Text = "AutoClear";
+            this.cb_autoclear.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(878, 453);
+            this.Controls.Add(this.cb_autoclear);
+            this.Controls.Add(this.cb_autosave);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -915,6 +975,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.CheckBox cb_autosave;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripTextBox tb_saveinterval;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.CheckBox cb_autoclear;
     }
 }
 

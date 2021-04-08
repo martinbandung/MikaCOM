@@ -93,7 +93,7 @@ namespace MikaCOM
         }
 
         private void displayGraph(object sender, EventArgs e)
-        {            
+        {
             try
             {
                 dataStrGrap = sp.ReadLine();
@@ -104,7 +104,7 @@ namespace MikaCOM
                     DateTime localDate = DateTime.Now;
                     chart1.Series["Series1"].Points.AddXY(localDate, datas[0]);
                     chart1.Series["Series2"].Points.AddXY(localDate, datas[1]);
-                    textBox3.Text += localDate.ToString() + "." + localDate.ToString("fff") + "\t" + datas[0] + "\t" + datas[1] + "\r\n";
+                    textBox3.AppendText(localDate.ToString() + "." + localDate.ToString("fff") + "\t" + datas[0] + "\t" + datas[1] + "\n");
                     textBox4.Text = datas[0];
                     textBox5.Text = datas[1];
                 }
@@ -112,7 +112,7 @@ namespace MikaCOM
                 {
                     DateTime localDate = DateTime.Now;
                     chart1.Series["Series1"].Points.AddXY(localDate, datas[0]);
-                    textBox3.Text += localDate.ToString() + "." + localDate.ToString("fff") + "\t" + datas[0] + "\r\n";
+                    textBox3.AppendText(localDate.ToString() + "." + localDate.ToString("fff") + "\t" + datas[0] + "\n");
                     textBox4.Text = datas[0];
                 }
             }
@@ -129,13 +129,13 @@ namespace MikaCOM
                 if (radioButton4.Checked)
                 {
                     string serIn = sp.ReadExisting();
-                    textBox3.Text += serIn;
+                    textBox3.AppendText(serIn);
                 }
                 else
                 {
                     byte[] s = new byte[64];
                     int leng = sp.Read(s, 0, 64);
-                    textBox3.Text += BytesToStrHex(s, leng);
+                    textBox3.AppendText(BytesToStrHex(s, leng));
                 }
             }
             catch (Exception)
@@ -189,7 +189,7 @@ namespace MikaCOM
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox2.Checked)
+            if (checkBox2.Checked)
             {
                 checkBox1.Checked = false;
             }
@@ -221,7 +221,8 @@ namespace MikaCOM
                         if (checkBox3.Checked) serialPort1.Write("\r");
                         if (checkBox4.Checked) serialPort1.Write("\n");
                     }
-                    else {
+                    else
+                    {
                         serialPort1.Write(textBox1.Text);
                         if (checkBox3.Checked) serialPort1.Write("\r");
                         if (checkBox4.Checked) serialPort1.Write("\n");
@@ -230,14 +231,15 @@ namespace MikaCOM
                 else
                 {
                     if (listBox1.SelectedIndex >= 0)
-                    { 
+                    {
                         if (listPacketType[listBox1.SelectedIndex])
                         {
                             sendDataHex(listPacket[listBox1.SelectedIndex]);
                             if (checkBox10.Checked) serialPort1.Write("\r");
                             if (checkBox9.Checked) serialPort1.Write("\n");
                         }
-                        else {
+                        else
+                        {
                             serialPort1.Write(listPacket[listBox1.SelectedIndex]);
                             if (checkBox10.Checked) serialPort1.Write("\r");
                             if (checkBox9.Checked) serialPort1.Write("\n");
@@ -247,7 +249,7 @@ namespace MikaCOM
             }
             catch (Exception)
             {
-                
+
             }
         }
         private void sendDataHex(String TextIn)
@@ -277,7 +279,7 @@ namespace MikaCOM
                         }
                     }
                 }
-                serialPort1.Write(sendData, 0, sendData.Length);             
+                serialPort1.Write(sendData, 0, sendData.Length);
             }
             catch (Exception)
             {
@@ -321,7 +323,7 @@ namespace MikaCOM
             {
                 int i = listBox1.SelectedIndex;
                 if (i >= 0)
-                {                   
+                {
                     textBox1.Text = listPacketName[i];
                     for (int j = i; j < 9; j++)
                     {
@@ -342,7 +344,7 @@ namespace MikaCOM
         }
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox5.Checked)
+            if (checkBox5.Checked)
             {
                 timer1.Enabled = true;
                 timer1.Interval = Convert.ToInt32(numericUpDown1.Value);
@@ -357,7 +359,7 @@ namespace MikaCOM
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(panel2.Enabled)
+            if (panel2.Enabled)
             {
                 button3.PerformClick();
             }
@@ -377,16 +379,25 @@ namespace MikaCOM
         private void button4_Click(object sender, EventArgs e)
         {
             button4.Text = "Saving ...";
-            if(textBox2.Text == "")
+            if (textBox2.Text == "")
             {
                 button6.PerformClick();
             }
             if (textBox2.Text != "")
             {
-                StreamWriter sw = new StreamWriter(textBox2.Text);
-                sw.Write(textBox3.Text);
+                StreamWriter sw = new StreamWriter(textBox2.Text, true);
+                sw.WriteLine(textBox3.Text); //write line
                 sw.Close();
                 button4.Text = "Saved";
+
+                if(cb_autoclear.Checked)
+                {
+                    textBox3.Text = "";
+                    chart1.Series["Series1"].Points.Clear();
+                    chart1.Series["Series2"].Points.Clear();
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                }
             }
             else
             {
@@ -395,13 +406,49 @@ namespace MikaCOM
         }
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+            /*
             button4.Text = "Save";
+            textBox1.SelectionStart = textBox1.Text.Length;
+            textBox1.ScrollToCaret();
+            */
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             Help h = new Help();
             h.ShowDialog();
-        }  
+        }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_autosave_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_autosave.Checked)
+            {
+                timer2.Interval = Int32.Parse(tb_saveinterval.Text);
+                timer2.Enabled = true;
+            } 
+            else
+            {
+                timer2.Enabled = false;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (textBox3.Text != "")
+            {
+                button4.PerformClick();
+            }
+            
+        }
     }
 }

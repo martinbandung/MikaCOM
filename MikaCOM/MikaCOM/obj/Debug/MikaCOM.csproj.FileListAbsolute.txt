@@ -14,3 +14,20 @@ E:\KULIAH\sem 8\pisual\MikaCOM\MikaCOM\bin\Debug\MikaCOM.application
 E:\KULIAH\sem 8\pisual\MikaCOM\MikaCOM\obj\Debug\MikaCOM.TrustInfo.xml
 E:\KULIAH\sem 8\pisual\MikaCOM\MikaCOM\obj\Debug\MikaCOM.exe.manifest
 E:\KULIAH\sem 8\pisual\MikaCOM\MikaCOM\obj\Debug\MikaCOM.application
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.csprojAssemblyReference.cache
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.AddPacket.resources
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.Form1.resources
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.Help.resources
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.Properties.Resources.resources
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.csproj.GenerateResource.cache
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.exe
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.pdb
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\bin\Debug\MikaCOM.exe.config
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\bin\Debug\MikaCOM.exe.manifest
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\bin\Debug\MikaCOM.application
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\bin\Debug\MikaCOM.exe
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\bin\Debug\MikaCOM.pdb
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.csproj.CoreCompileInputs.cache
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.TrustInfo.xml
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.exe.manifest
+D:\martin\itb\MikaCOM\MikaCOM\MikaCOM\obj\Debug\MikaCOM.application
